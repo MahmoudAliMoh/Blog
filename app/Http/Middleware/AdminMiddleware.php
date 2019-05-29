@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Admin
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,6 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        dd(auth()->user());
         if (auth()->user()->isAdmin == 'yes') {
             return $next($request);
         }

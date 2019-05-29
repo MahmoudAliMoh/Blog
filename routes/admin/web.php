@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Admin Web Routes
+| AdminMiddleware Web Routes
 |--------------------------------------------------------------------------
 |
 | These routes are loaded by the RouteServiceProvider within a group which
@@ -11,4 +11,4 @@
 */
 
 
-Route::get('/dashboard', 'AdminController@index')->name('dashboard.index');
+Route::get('/', 'AdminController@index')->name('dashboard.index');
