@@ -76,6 +76,7 @@
     </nav>
 
     <main class="py-4">
+        @include('admin.partials._sidebar')
         @yield('content')
     </main>
 </div>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('appName', 'Categories')
+@section('appName', 'Categories - Show')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -15,7 +15,7 @@
                             </div>
                         @endif
 
-                        Welcome {{ auth()->user()->name }} to dashboard.
+                        You are logged in!
                     </div>
                 </div>
             </div>
