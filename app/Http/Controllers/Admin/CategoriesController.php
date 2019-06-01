@@ -2,11 +2,27 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Contracts\Categories\CategoryServiceContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
+    /**
+     * Instance from CategoriesServiceContract.
+     * @var $categoriesService
+     */
+    protected $categoriesService;
+
+    /**
+     * CategoriesController constructor.
+     * @param CategoryServiceContract $categoriesService
+     */
+    public function __construct(CategoryServiceContract $categoriesService)
+    {
+        $this->categoriesService = $categoriesService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +51,10 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $this->categoriesService->store($data);
+        flash('Category added successfully.')->success();
+        return redirect()->route('categories.index');
     }
 
     /**

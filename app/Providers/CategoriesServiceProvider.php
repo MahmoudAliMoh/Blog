@@ -8,9 +8,9 @@ use App\Contracts\Categories\CategoryValidatorContract;
 use App\Repositories\Categories\CategoriesRepository;
 use App\Services\Categories\CategoriesService;
 use App\Validations\Categories\CategoriesValidator;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
-class IConnectServiceProvider extends ServiceProvider
+class CategoriesServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.

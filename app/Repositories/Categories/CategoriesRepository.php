@@ -4,17 +4,30 @@ namespace App\Repositories\Categories;
 
 
 use App\Contracts\Categories\CategoryRepositoryContract;
+use App\Models\Category;
 
 class CategoriesRepository implements CategoryRepositoryContract
 {
+
+    /*
+     * Model instance;
+     */
+    protected $model;
+
+    private function __construct(Category $model)
+    {
+        $this->model = $model;
+    }
+
     /**
      * Store categories data in data base.
      *
      * @param $data
-     * @return array
+     * @return bool
      */
-    public function store($data): array
+    public function store($data): bool
     {
-        // TODO: Implement store() method.
+        $this->model->create($data);
+        return true;
     }
 }

@@ -8,7 +8,7 @@ interface CategoryServiceContract
      * Store categories data.
      *
      * @param $data
-     * @return array
+     * @return bool
      */
-    public function store($data): array;
+    public function store($data): bool;
 }

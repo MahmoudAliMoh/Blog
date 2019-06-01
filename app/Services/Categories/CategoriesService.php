@@ -2,18 +2,71 @@
 
 namespace App\Services\Categories;
 
+use App\Contracts\Categories\CategoryRepositoryContract;
 use App\Contracts\Categories\CategoryServiceContract;
+use App\Contracts\Categories\CategoryValidatorContract;
+use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 
 class CategoriesService implements CategoryServiceContract
 {
+    /*
+     * repository instance from CategoriesRepositoryContract.
+     */
+    protected $repository;
+
+    /*
+     * validator instance from CategoriesValidatorContract.
+     */
+    protected $validator;
+
     /**
-     * Store categories data.
+     * CategoriesService constructor.
+     * @param CategoryRepositoryContract $repository
+     * @param CategoryValidatorContract $validator
+     */
+    private function __construct(CategoryRepositoryContract $repository, CategoryValidatorContract $validator)
+    {
+        $this->repository = $repository;
+        $this->validator = $validator;
+    }
+
+    /**
+     * Validate request of categories;
      *
      * @param $data
-     * @return array
+     * @return void
      */
-    public function store($data): array
+    private function validator($data): void
     {
-        // TODO: Implement store() method.
+        $this->validator->validations($data);
+    }
+
+    /**
+     * Validate and store categories data.
+     *
+     * @param $data
+     * @return bool
+     * @throws /Exception
+     */
+    public function store($data): bool
+    {
+        $this->validator($data);
+        DB::beginTransaction();
+        try {
+
+            $categoryData = [
+                'name' => $data['name']
+            ];
+
+            $this->repository->store($categoryData);
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw $exception;
+        }
+
+        return true;
     }
 }
