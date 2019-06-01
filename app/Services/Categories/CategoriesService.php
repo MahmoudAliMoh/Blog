@@ -6,7 +6,6 @@ use App\Contracts\Categories\CategoryRepositoryContract;
 use App\Contracts\Categories\CategoryServiceContract;
 use App\Contracts\Categories\CategoryValidatorContract;
 use Illuminate\Support\Facades\DB;
-use Mockery\Exception;
 
 class CategoriesService implements CategoryServiceContract
 {

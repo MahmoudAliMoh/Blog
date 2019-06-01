@@ -8,7 +8,7 @@ use App\Contracts\Categories\CategoryValidatorContract;
 use App\Repositories\Categories\CategoriesRepository;
 use App\Services\Categories\CategoriesService;
 use App\Validations\Categories\CategoriesValidator;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 class CategoriesServiceProvider extends ServiceProvider
 {
