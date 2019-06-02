@@ -3,18 +3,22 @@
 @section('appName', 'Categories - Update')
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <form method="POST" action="{{ route('categories.update') }}">
-                @method('POST')
-                @csrf
+        <div class="row">
+            <div class="col-md-12">
+                <form method="POST" action="{{ route('categories.update', $category['id']) }}">
+                    @method('PUT')
+                    @csrf
 
-                <div class="form-group">
-                    <label for="categoryName">Category Name</label>
-                    <input type="text" name="name" class="form-control" id="categoryName" placeholder="Enter category name">
-                </div>
+                    <div class="form-group">
+                        <label for="categoryName">Category Name</label>
+                        <input type="text" name="name" value="{{ $category['name'] ?? old('name') }}" class="form-control" id="categoryName"
+                               placeholder="Enter category name">
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="{{ route('categories.index') }}" class="btn btn-light">Back</a>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

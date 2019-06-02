@@ -54,6 +54,7 @@ class CategoriesService implements CategoryServiceContract
     {
         $this->validator($data);
         DB::beginTransaction();
+
         try {
 
             $categoryData = [
@@ -83,5 +84,72 @@ class CategoriesService implements CategoryServiceContract
             ->transformWith(new CategoriesTransformer())
             ->toArray();
         return $categoriesData;
+    }
+
+    /**
+     * Destroy category by id.
+     *
+     * @param int $id
+     * @return bool
+     * @throws /Exception
+     */
+    public function destroy(int $id): bool
+    {
+        DB::beginTransaction();
+
+        try {
+            $this->repository->destroy($id);
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw $exception;
+        }
+
+        return true;
+    }
+
+    /**
+     * Show category data by id.
+     *
+     * @param int $id
+     * @return array
+     */
+    public function show(int $id): array
+    {
+        $category = $this->repository->show($id);
+        $categoryData = FractalFacade::item($category)
+            ->transformWith(new CategoriesTransformer())
+            ->toArray();
+        return $categoryData;
+    }
+
+    /**
+     * Update category data by id.
+     *
+     * @param array $data
+     * @param int $id
+     * @return bool
+     * @throws /Exception
+     */
+    public function update(int $id, array $data): bool
+    {
+        $this->validator($data);
+        DB::beginTransaction();
+
+        try {
+
+            $categoryData = [
+                'name' => $data['name']
+            ];
+
+            $this->repository->update($id, $categoryData);
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw $exception;
+        }
+
+        return true;
     }
 }

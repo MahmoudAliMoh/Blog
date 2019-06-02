@@ -40,4 +40,43 @@ class CategoriesRepository implements CategoryRepositoryContract
     {
         return $this->model->orderBy('id', 'DESC')->get()->toArray();
     }
+
+
+    /**
+     * Destroy category by id in storage.
+     *
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function destroy(int $id): bool
+    {
+        $this->model->where('id', $id)->delete();
+        return true;
+    }
+
+    /**
+     * Show category data by id.
+     *
+     * @param int $id
+     * @return array
+     */
+    public function show(int $id): array
+    {
+        $category = $this->model->findOrFail($id)->toArray();
+        return $category;
+    }
+
+    /**
+     * Update category data by id.
+     *
+     * @param array $data
+     * @param int $id
+     * @return bool
+     */
+    public function update(int $id, array $data): bool
+    {
+        $this->model->where('id', $id)->update(['name' => $data['name']]);
+        return true;
+    }
 }

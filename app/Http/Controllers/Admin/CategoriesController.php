@@ -67,7 +67,8 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.categories.edit');
+        $category = $this->categoriesService->show($id)['data'];
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -79,7 +80,11 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $this->categoriesService->update($id, $data);
+
+        flash('Category updated successfully.')->success();
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -90,6 +95,9 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->categoriesService->destroy($id);
+
+        flash('Category deleted successfully.')->success();
+        return redirect()->route('categories.index');
     }
 }
