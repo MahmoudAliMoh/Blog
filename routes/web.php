@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'WelcomeController@index')->name('welcome-home');
+Route::get('/blog/{id}', 'WelcomeController@show')->name('home.show');
 
 Auth::routes();
 

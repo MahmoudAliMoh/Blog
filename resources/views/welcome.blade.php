@@ -9,7 +9,7 @@
                     <div class="card">
                         <img src="{{ asset('storage/'. $item['cover']) }}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <a href=""><h5 class="card-title">{{ $item['title'] }}</h5></a>
+                            <a href="{{ route('home.show', $item['id']) }}"><h5 class="card-title">{{ $item['title'] }}</h5></a>
                             <p class="card-text">
                                 {{ str_limit($item['content'], $limit = 150, $end = '...') }}
                             </p>

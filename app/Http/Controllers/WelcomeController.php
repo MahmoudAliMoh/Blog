@@ -34,4 +34,10 @@ class WelcomeController extends Controller
         $blog = $this->blogService->list()['data'];
         return view('welcome', compact('blog'));
     }
+
+    public function show($id)
+    {
+        $item = $this->blogService->show($id)['data'];
+        return view('show', compact('item'));
+    }
 }
