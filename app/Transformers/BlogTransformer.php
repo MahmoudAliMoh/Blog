@@ -6,6 +6,16 @@ use League\Fractal\TransformerAbstract;
 
 class BlogTransformer extends TransformerAbstract
 {
+
+    /**
+     * List of resources possible to include
+     *
+     * @var array
+     */
+    protected $availableIncludes = [
+        'categories',
+    ];
+
     /**
      * Transform the given data
      *
@@ -15,7 +25,7 @@ class BlogTransformer extends TransformerAbstract
     public function transform(array $blog)
     {
         $data = [
-            'id' => $blog['id'] ?? null,
+            'id' => (int) $blog['id'] ?? null,
             'title' => $blog['title'] ?? null,
             'content' => $blog['content'] ?? null,
             'cover' => $blog['cover'] ?? null,
@@ -25,5 +35,15 @@ class BlogTransformer extends TransformerAbstract
         return array_filter($data, function ($item) {
             return !is_null($item);
         });
+    }
+
+
+    /**
+     * @param array $categories
+     * @return \League\Fractal\Resource\Item
+     */
+    public function includeCategories(array $categories)
+    {
+        return $this->item($categories['category'], new CategoriesTransformer());
     }
 }

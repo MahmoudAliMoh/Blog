@@ -15,4 +15,9 @@ class Blog extends Authenticatable
     protected $fillable = [
         'title', 'content', 'cover', 'category_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 }

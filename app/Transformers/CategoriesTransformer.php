@@ -15,7 +15,7 @@ class CategoriesTransformer extends TransformerAbstract
     public function transform(array $category)
     {
         $data = [
-            'id' => $category['id'] ?? null,
+            'id' => (int) $category['id'] ?? null,
             'name' => $category['name'] ?? null,
         ];
 

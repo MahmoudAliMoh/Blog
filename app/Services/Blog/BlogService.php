@@ -93,7 +93,9 @@ class BlogService implements BlogServiceContract
         $blog = $this->repository->list();
         $blogData = FractalFacade::collection($blog)
             ->transformWith(new BlogTransformer())
+            ->parseIncludes('categories')
             ->toArray();
+
         return $blogData;
     }
 

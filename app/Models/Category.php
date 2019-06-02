@@ -15,4 +15,14 @@ class Category extends Authenticatable
     protected $fillable = [
         'name'
     ];
+
+    /**
+     * HasMany relation between category and blog
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function blog()
+    {
+        return $this->hasMany(Blog::class, 'category_id', 'id');
+    }
 }
