@@ -20,3 +20,8 @@ Route::get('/', 'AdminController@index')->name('dashboard.index');
  * Categories route
  */
 Route::resource('categories', 'CategoriesController');
+
+/**
+ * Blog route
+ */
+Route::resource('blog', 'BlogController');

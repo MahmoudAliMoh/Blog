@@ -13,7 +13,7 @@ class AdminCredentialsSeed extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'AdminMiddleware',
+            'name' => 'Mahmoud Ali',
             'email' => 'admin@blog.com',
             'password' => bcrypt('admin@123'),
             'isAdmin' => 'yes'

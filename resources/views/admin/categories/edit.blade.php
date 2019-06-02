@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin-app')
 
-@section('appName', 'Categories - Update')
+@section('appName', 'Categories - Edit')
 @section('content')
     <div class="container">
         <div class="row">

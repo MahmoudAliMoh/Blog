@@ -6,6 +6,6 @@
         <a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Blog</a>
+        <a class="nav-link" href="{{ route('blog.index') }}">Blog</a>
     </li>
 </ul>
