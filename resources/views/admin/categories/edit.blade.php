@@ -9,9 +9,20 @@
                     @method('PUT')
                     @csrf
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="form-group">
                         <label for="categoryName">Category Name</label>
-                        <input type="text" name="name" value="{{ $category['name'] ?? old('name') }}" class="form-control" id="categoryName"
+                        <input type="text" name="name" value="{{ $category['name'] ?? old('name') }}"
+                               class="form-control" id="categoryName"
                                placeholder="Enter category name">
                     </div>
 
