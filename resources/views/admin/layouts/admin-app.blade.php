@@ -76,6 +76,7 @@
     </nav>
 
     <main class="py-4">
+        @include('admin.partials._sidebar')
         @include('flash::message')
         @yield('content')
     </main>

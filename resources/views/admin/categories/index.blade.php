@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin-app')
 
 @section('appName', 'Categories - Index')
 @section('content')
@@ -15,21 +15,28 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Jacob</td>
-                    <td>@twitter</td>
-                </tr>
+                @foreach($categories as $category)
+                    <tr>
+                        <th scope="row">{{ $category['id'] }}</th>
+                        <td>{{ $category['name'] }}</td>
+                        <td>
+                            <div class="d-inline-flex">
+                                <a href="{{ route('categories.edit', $category['id']) }}" class="btn btn-dark">Edit</a>
+
+                                <form
+                                    action="{{ route('categories.destroy', $category['id']) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('Are you sure you want to delete this category?')"
+                                            href="">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

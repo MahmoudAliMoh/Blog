@@ -11,4 +11,11 @@ interface CategoryServiceContract
      * @return bool
      */
     public function store($data): bool;
+
+    /**
+     * List all categories data;
+     *
+     * @return array
+     */
+    public function list(): array;
 }

@@ -14,7 +14,7 @@ class CategoriesRepository implements CategoryRepositoryContract
      */
     protected $model;
 
-    private function __construct(Category $model)
+    public function __construct(Category $model)
     {
         $this->model = $model;
     }
@@ -29,5 +29,15 @@ class CategoriesRepository implements CategoryRepositoryContract
     {
         $this->model->create($data);
         return true;
+    }
+
+    /**
+     * List all categories data;
+     *
+     * @return array
+     */
+    public function list(): array
+    {
+        return $this->model->orderBy('id', 'DESC')->get()->toArray();
     }
 }

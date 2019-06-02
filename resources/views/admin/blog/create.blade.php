@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin-app')
 
 @section('appName', 'Blog - Create')
 @section('content')

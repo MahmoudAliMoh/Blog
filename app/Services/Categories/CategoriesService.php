@@ -5,7 +5,9 @@ namespace App\Services\Categories;
 use App\Contracts\Categories\CategoryRepositoryContract;
 use App\Contracts\Categories\CategoryServiceContract;
 use App\Contracts\Categories\CategoryValidatorContract;
+use App\Transformers\CategoriesTransformer;
 use Illuminate\Support\Facades\DB;
+use Spatie\Fractal\FractalFacade;
 
 class CategoriesService implements CategoryServiceContract
 {
@@ -24,7 +26,7 @@ class CategoriesService implements CategoryServiceContract
      * @param CategoryRepositoryContract $repository
      * @param CategoryValidatorContract $validator
      */
-    private function __construct(CategoryRepositoryContract $repository, CategoryValidatorContract $validator)
+    public function __construct(CategoryRepositoryContract $repository, CategoryValidatorContract $validator)
     {
         $this->repository = $repository;
         $this->validator = $validator;
@@ -67,5 +69,19 @@ class CategoriesService implements CategoryServiceContract
         }
 
         return true;
+    }
+
+    /**
+     * List all categories data;
+     *
+     * @return array
+     */
+    public function list(): array
+    {
+        $categories = $this->repository->list();
+        $categoriesData = FractalFacade::collection($categories)
+            ->transformWith(new CategoriesTransformer())
+            ->toArray();
+        return $categoriesData;
     }
 }
