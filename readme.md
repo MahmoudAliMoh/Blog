@@ -15,5 +15,5 @@ $ php artisan migrate
 ```
    - Run seeds to add admin credentials. EMAIL: admin@blog.com, PASSWORD: admin@123
 ```sh
-$ php artisan seed
+$ php artisan db:seed
 ```
