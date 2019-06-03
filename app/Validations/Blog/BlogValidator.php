@@ -16,7 +16,7 @@ class BlogValidator implements BlogValidatorContract
     public function validations(array $data)
     {
         $rules = [
-            'title' => 'required|max:250|regex:/(?=.*[a-z])(?=.*[a-z0-9])/',
+            'title' => 'required|max:250|regex:/(?=.*[a-zA-Z])(?=.*[a-zA-Z0-9])/',
             'content' => 'required',
             'cover' => 'sometimes|max:3000',
             'category_id' => 'required'
