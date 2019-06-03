@@ -13,7 +13,7 @@ class BlogTransformer extends TransformerAbstract
      * @var array
      */
     protected $availableIncludes = [
-        'categories',
+        'categories', 'comments'
     ];
 
     /**
@@ -45,5 +45,10 @@ class BlogTransformer extends TransformerAbstract
     public function includeCategories(array $categories)
     {
         return $this->item($categories['category'], new CategoriesTransformer());
+    }
+
+    public function includeComments(array $comments)
+    {
+        return $this->collection($comments['comment'], new CommentsTransformer());
     }
 }

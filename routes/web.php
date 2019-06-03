@@ -11,9 +11,17 @@
 |
 */
 
+/*
+ * Welcome routes
+ */
 Route::get('/', 'WelcomeController@index')->name('welcome-home');
 Route::get('/blog/{id}', 'WelcomeController@show')->name('home.show');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/*
+ * Comments routes
+ */
+Route::post('/blog/comment/{id}', 'CommentsController@store')->name('comments.store');

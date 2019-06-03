@@ -38,7 +38,7 @@ class BlogRepository implements BlogRepositoryContract
      */
     public function list(): array
     {
-        return $this->model->orderBy('id', 'DESC')->with('category')->get()->toArray();
+        return $this->model->orderBy('id', 'DESC')->with('category', 'comment')->get()->toArray();
     }
 
 
@@ -63,7 +63,7 @@ class BlogRepository implements BlogRepositoryContract
      */
     public function show(int $id): array
     {
-        $category = $this->model->with('category')->findOrFail($id)->toArray();
+        $category = $this->model->with('category', 'comment', 'comment.user')->findOrFail($id)->toArray();
         return $category;
     }
 

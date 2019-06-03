@@ -161,6 +161,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\CategoriesServiceProvider::class,
         App\Providers\BlogServiceProvider::class,
+        App\Providers\CommentsServiceProvider::class
 
     ],
 

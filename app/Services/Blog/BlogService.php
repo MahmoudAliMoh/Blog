@@ -132,7 +132,7 @@ class BlogService implements BlogServiceContract
         $blog = $this->repository->show($id);
         $blogData = FractalFacade::item($blog)
             ->transformWith(new BlogTransformer())
-            ->parseIncludes('categories')
+            ->parseIncludes(['categories', 'comments'])
             ->toArray();
         return $blogData;
     }

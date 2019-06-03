@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('appName', 'Welcome')
+@section('appName', $item['title'])
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -21,45 +21,42 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="media" style="width: 70%; margin-top: 30px;">
-                <div class="media-body">
-                    <h5 class="mt-0">Media heading</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc
-                    ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
 
-            <div class="media" style="width: 70%; margin-top: 30px;">
-                <div class="media-body">
-                    <h5 class="mt-0">Media heading</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc
-                    ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            @forelse($item['comments']['data'] as $comment)
+                <div class="media" style="width: 70%; margin-top: 30px;">
+                    <div class="media-body">
+                        <h5 class="mt-0">{{ $comment['user_name'] }}</h5>
+                        {{ $comment['comment'] }}
+                    </div>
                 </div>
-            </div>
-            <div class="media" style="width: 70%; margin-top: 30px;">
-                <div class="media-body">
-                    <h5 class="mt-0">Media heading</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc
-                    ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
+            @empty
+                <h5>No comments added on this post</h5>
+            @endforelse
+
         </div>
 
         <hr>
 
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <form>
-                    <div class="form-group">
-                        <label for="comment">Email address</label>
-                        <textarea name="comment" id="comment" class="form-control"></textarea>
-                    </div>
+                @if(auth()->check())
+                    <form method="post" action="{{ route('comments.store', $item['id']) }}">
+                        @method('POST')
+                        @csrf
+                        <h5>Add your comment</h5>
+                        @include('flash::message')
 
-                    <button type="submit" class="btn btn-primary">Comment</button>
-                </form>
+                        <div class="form-group">
+                            <label for="comment">Email address</label>
+                            <textarea name="comment" id="comment" class="form-control"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Comment</button>
+                    </form>
+                @else
+                    <h5>You need to be logged in to add comments, login from <a href="{{ route('login') }}">here</a>
+                    </h5>
+                @endif
             </div>
         </div>
     </div>
