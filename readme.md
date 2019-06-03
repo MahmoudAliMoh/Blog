@@ -9,7 +9,7 @@ This is a simple blog example with categories.
 ```sh
 $ composer install
 ```
-  - Run migrations.
+  - Add your .env file with DB credentials then Run migrations.
 ```sh
 $ php artisan migrate
 ```
@@ -17,3 +17,9 @@ $ php artisan migrate
 ```sh
 $ php artisan db:seed
 ```
+  - Run this to link storage images. 
+```sh
+$ php artisan storage:link
+```
+
+Now you're up and running.
